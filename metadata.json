@@ -1,0 +1,7 @@
+{
+  "name": "Iron Logic",
+  "description": "An intelligent workout architect that tracks recovery, recommends optimal training splits, and includes an AI training assistant.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
