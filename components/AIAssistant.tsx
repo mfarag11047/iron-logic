@@ -26,8 +26,8 @@ const AIAssistant: React.FC = () => {
     useEffect(scrollToBottom, [messages]);
 
     const getSystemContext = () => {
-        const tiredMuscles = Object.entries(muscleStates)
-            .filter(([, s]: [string, MuscleState]) => s.recovery < 70)
+        const tiredMuscles = (Object.entries(muscleStates) as [string, MuscleState][])
+            .filter(([, state]) => state.recovery < 70)
             .map(([name]) => name);
         
         return `

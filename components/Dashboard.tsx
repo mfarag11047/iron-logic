@@ -9,8 +9,8 @@ const Dashboard: React.FC = () => {
     const cnsValue = Math.max(0, 100 - cnsStress);
     const cnsData = [{ name: 'CNS', value: cnsValue, fill: cnsValue > 80 ? '#22c55e' : cnsValue > 50 ? '#eab308' : '#ef4444' }];
 
-    const sortedMuscles = Object.entries(muscleStates)
-        .sort(([, a]: [string, MuscleState], [, b]: [string, MuscleState]) => a.recovery - b.recovery);
+    const sortedMuscles = (Object.entries(muscleStates) as [string, MuscleState][])
+        .sort(([, a], [, b]) => a.recovery - b.recovery);
 
     // Prepare data for radar chart (Group readiness)
     const groupData = [
@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
     const getAvg = (names: string[]) => {
         const valid = names.filter(n => muscleStates[n]);
         if (!valid.length) return 100;
-        return valid.reduce((sum, n) => sum + muscleStates[n].recovery, 0) / valid.length;
+        return valid.reduce((sum, n) => sum + (muscleStates[n] as MuscleState).recovery, 0) / valid.length;
     };
     
     groupData[0].A = getAvg(["Chest", "Triceps", "Front Delts"]);
